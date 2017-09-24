@@ -1,4 +1,4 @@
-package uk.co.chriskeeley;
+package uk.co.chriskeeley.snake_eyes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
