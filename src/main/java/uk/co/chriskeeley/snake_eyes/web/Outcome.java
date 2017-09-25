@@ -1,6 +1,6 @@
 package uk.co.chriskeeley.snake_eyes.web;
 
-class Outcome {
+public class Outcome {
 
     private final Integer dice1;
     private final Integer dice2;
@@ -14,5 +14,25 @@ class Outcome {
         this.stake = stake;
         this.winnings = winnings;
         this.payout_name = payout_name;
+    }
+
+    public Integer getDice1() {
+        return dice1;
+    }
+
+    public Integer getDice2() {
+        return dice2;
+    }
+
+    public Double getStake() {
+        return stake;
+    }
+
+    public Double getWinnings() {
+        return winnings;
+    }
+
+    public String getPayout_name() {
+        return payout_name;
     }
 }
