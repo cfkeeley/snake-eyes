@@ -31,14 +31,9 @@ public class SnakeEyesService {
         int dice2 = Integer.parseInt(diceValues[1]);
 
         final boolean isSnakeEyes = dice1 == 1 && dice2 == 1;
-        final double winnings = calculateWinnings(isSnakeEyes,stake);
-        final Payout payoutName = isSnakeEyes ? Payout.SNAKE_EYES : Payout.OTHER_PAIR;
+        final Payout payout = isSnakeEyes ? Payout.SNAKE_EYES : Payout.OTHER_PAIR;
+        final double winnings = stake * payout.multiplier;
 
-        return new Outcome(dice1, dice2, stake, winnings, payoutName);
-    }
-
-    private double calculateWinnings(final boolean isSnakeEyes, double stake) {
-        return isSnakeEyes ? stake * Payout.SNAKE_EYES.multiplier
-                : stake * Payout.OTHER_PAIR.multiplier;
+        return new Outcome(dice1, dice2, stake, winnings, payout);
     }
 }
