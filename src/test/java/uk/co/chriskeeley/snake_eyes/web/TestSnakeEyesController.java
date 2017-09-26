@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration
+@ContextConfiguration(classes={TestSnakeEyesController.Config.class})
 public class TestSnakeEyesController {
 
     @Autowired
@@ -39,10 +39,10 @@ public class TestSnakeEyesController {
     }
 
     @Test
-    public void controllerShouldReturnExpectedOutcome() throws Exception {
+    public void controllerShouldReturnExpectedOutcomeForSnakeEyes() throws Exception {
 
-        when(snakeEyesService.getOutcome()).thenReturn(
-                new Outcome(1,1, 1.00, 30.00, "snake eyes"));
+        when(snakeEyesService.getOutcome(1.00)).thenReturn(
+                new Outcome(1,1, 1.00, 30.0, PayoutName.SNAKE_EYES));
 
         mockMvc.perform(
                 get("/snakeeyes/play"))
@@ -58,7 +58,7 @@ public class TestSnakeEyesController {
     @Configuration
     @ComponentScan
     @EnableWebMvc
-    public static class Config {
+    static class Config {
         @Bean
         public SnakeEyesService snakeEyesService() {
             return Mockito.mock(SnakeEyesService.class);

@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/snakeeyes")
 class SnakeEyesController {
 
-    @Autowired
     private final SnakeEyesService outcomeService;
 
+    @Autowired
     public SnakeEyesController(final SnakeEyesService outcomeService) {
         this.outcomeService = outcomeService;
     }
 
     @GetMapping(path = "/play")
     public Outcome generateOutcome() {
-        return outcomeService.getOutcome();
+        return outcomeService.getOutcome(1.00);
     }
 }

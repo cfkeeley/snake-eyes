@@ -6,9 +6,9 @@ public class Outcome {
     private final Integer dice2;
     private final Double stake;
     private final Double winnings;
-    private final String payout_name;
+    private final PayoutName payout_name;
 
-    public Outcome(final Integer dice1, final Integer dice2, final Double stake, final Double winnings, final String payout_name) {
+    public Outcome(final Integer dice1, final Integer dice2, final Double stake, final Double winnings, final PayoutName payout_name) {
         this.dice1 = dice1;
         this.dice2 = dice2;
         this.stake = stake;
@@ -33,6 +33,6 @@ public class Outcome {
     }
 
     public String getPayout_name() {
-        return payout_name;
+        return payout_name.getPayoutName();
     }
 }

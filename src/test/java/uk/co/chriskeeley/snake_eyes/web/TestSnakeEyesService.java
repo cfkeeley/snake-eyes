@@ -1,17 +1,82 @@
 package uk.co.chriskeeley.snake_eyes.web;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import static org.mockito.Mockito.when;
+import static org.assertj.core.api.Assertions.*;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(classes={TestSnakeEyesService.Config.class})
 public class TestSnakeEyesService {
 
     final static Logger log = LoggerFactory.getLogger(TestSnakeEyesService.class);
 
+    @Autowired
+    private SnakeEyesDiceValidator snakeEyesDiceValidator;
+
+    @Autowired
+    private SnakeEyesDice snakeEyesDice;
+
     @Test
-    public void shouldRespondWithExpectedOutcome() {
-        final SnakeEyesService roller = new SnakeEyesService();
-        final Outcome outcome = roller.getOutcome();
-        log.info("Outcome:'{}'",outcome);
+    public void shouldRespondWithExpectedOtherPairOutcome() {
+
+        when(snakeEyesDice.roll()).thenReturn("1 2");
+
+        final SnakeEyesService snakeEyesService = new SnakeEyesService(snakeEyesDice,snakeEyesDiceValidator);
+        final Outcome outcome = snakeEyesService.getOutcome(1.00);
+
+        assertThat(outcome.getDice1()).as("unexpected dice 1 value").isEqualTo(1);
+        assertThat(outcome.getDice2()).as("unexpected dice 2 value").isEqualTo(2);
+        assertThat(outcome.getStake()).as("unexpected stake value").isEqualTo(1.00);
+        assertThat(outcome.getWinnings()).as("unexpected winnings value").isEqualTo(7.00);
+        assertThat(outcome.getPayout_name()).as("unexpected winnings value")
+                .isEqualTo(PayoutName.OTHER_PAIR.getPayoutName());
+
+    }
+
+    @Test
+    public void shouldRespondWithExpectedSnakeEyesOutcome() {
+
+        when(snakeEyesDice.roll()).thenReturn("1 1");
+
+        final SnakeEyesService snakeEyesService = new SnakeEyesService(snakeEyesDice,snakeEyesDiceValidator);
+        final Outcome outcome = snakeEyesService.getOutcome(1.00);
+
+        assertThat(outcome.getDice1()).as("unexpected dice 1 value").isEqualTo(1);
+        assertThat(outcome.getDice2()).as("unexpected dice 2 value").isEqualTo(1);
+        assertThat(outcome.getStake()).as("unexpected stake value").isEqualTo(1.00);
+        assertThat(outcome.getWinnings()).as("unexpected winnings value").isEqualTo(30.00);
+        assertThat(outcome.getPayout_name()).as("unexpected winnings value")
+                .isEqualTo(PayoutName.SNAKE_EYES.getPayoutName());
+
+    }
+
+    @Configuration
+    @ComponentScan
+    @EnableWebMvc
+    static class Config {
+
+        @Bean
+        public SnakeEyesDiceValidator snakeEyesDiceValidator() {
+            return new SnakeEyesDiceValidator();
+        }
+
+        @Bean
+        public SnakeEyesDice snakeEyesDice() {
+            return Mockito.mock(SnakeEyesDice.class);
+        }
     }
 }
