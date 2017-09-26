@@ -9,12 +9,13 @@ import java.util.regex.Pattern;
 public class SnakeEyesDiceValidator {
 
     public String validate(final String snakeEyesDiceResult) {
-        final Pattern diceRollValidation = Pattern.compile("([1-6])\\s([1-6])");
+        final Pattern diceRollValidation = Pattern.compile("([1-6])\\t([1-6])\n");
         final Matcher matcher = diceRollValidation.matcher(snakeEyesDiceResult);
 
         if(!matcher.matches() || matcher.groupCount() != 2) {
             throw new IllegalStateException("failed to get a valid dice roll outcome. Got:'"+snakeEyesDiceResult+"'");
         }
+
         return snakeEyesDiceResult;
     }
 }

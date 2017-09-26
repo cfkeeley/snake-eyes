@@ -57,8 +57,8 @@ public class TestSnakeEyesService {
 
         assertThat(outcome.getDice1()).as("unexpected dice 1 value").isEqualTo(1);
         assertThat(outcome.getDice2()).as("unexpected dice 2 value").isEqualTo(1);
-        assertThat(outcome.getStake()).as("unexpected stake value").isEqualTo(1.00);
-        assertThat(outcome.getWinnings()).as("unexpected winnings value").isEqualTo(30.00);
+        assertThat(outcome.getStake()).as("unexpected stake value").isEqualTo(2.00);
+        assertThat(outcome.getWinnings()).as("unexpected winnings value").isEqualTo(60.00);
         assertThat(outcome.getPayout_name()).as("unexpected winnings value")
                 .isEqualTo(Payout.SNAKE_EYES.getName());
     }

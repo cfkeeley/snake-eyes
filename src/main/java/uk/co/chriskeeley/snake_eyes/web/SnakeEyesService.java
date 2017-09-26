@@ -22,16 +22,18 @@ public class SnakeEyesService {
 
     public Outcome getOutcome(final double stake) {
 
-        final String[] diceValues = snakeEyesDiceValidator.validate(
-                snakeEyesDice.roll()).split(" ");
+        final String diceValues = snakeEyesDiceValidator.validate(
+                snakeEyesDice.roll());
 
-        log.info("dice values:'{}','{}'",diceValues[0],diceValues[1]);
+        final String[] tokens = diceValues.replace("\n","").split("\t");
 
-        int dice1 = Integer.parseInt(diceValues[0]);
-        int dice2 = Integer.parseInt(diceValues[1]);
+        log.info("dice values:'{}','{}'",tokens[0],tokens[1]);
+
+        int dice1 = Integer.parseInt(tokens[0]);
+        int dice2 = Integer.parseInt(tokens[1]);
 
         final boolean isSnakeEyes = dice1 == 1 && dice2 == 1;
-        final Payout payout = isSnakeEyes ? Payout.SNAKE_EYES : Payout.OTHER_PAIR;
+        final Payout payout = isSnakeEyes ? Payout.SNAKE_EYES : dice1 == dice2 ? Payout.OTHER_PAIR :Payout.NO_WIN;
         final double winnings = stake * payout.multiplier;
 
         return new Outcome(dice1, dice2, stake, winnings, payout);

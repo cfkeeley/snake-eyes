@@ -33,6 +33,6 @@ public class Outcome {
     }
 
     public String getPayout_name() {
-        return payout_name.getPayoutName();
+        return payout_name.getName();
     }
 }

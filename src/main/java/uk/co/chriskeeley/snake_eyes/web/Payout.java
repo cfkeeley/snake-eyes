@@ -1,7 +1,7 @@
 package uk.co.chriskeeley.snake_eyes.web;
 
 public enum Payout {
-    SNAKE_EYES("snake eyes", 30),OTHER_PAIR("other pair",7);
+    SNAKE_EYES("snake eyes", 30),OTHER_PAIR("other pair",7),NO_WIN("no win",0);
     final String name;
     int multiplier;
     Payout(final String name, int multiplier) {
