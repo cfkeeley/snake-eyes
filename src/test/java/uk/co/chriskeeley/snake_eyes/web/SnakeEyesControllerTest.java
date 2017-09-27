@@ -22,8 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes={TestSnakeEyesController.Config.class})
-public class TestSnakeEyesController {
+@ContextConfiguration(classes={SnakeEyesControllerTest.Config.class})
+public class SnakeEyesControllerTest {
 
     @Autowired
     private WebApplicationContext ctx;

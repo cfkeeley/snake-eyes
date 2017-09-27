@@ -19,10 +19,10 @@ import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes={TestSnakeEyesService.Config.class})
-public class TestSnakeEyesService {
+@ContextConfiguration(classes={SnakeEyesServiceTest.Config.class})
+public class SnakeEyesServiceTest {
 
-    final static Logger log = LoggerFactory.getLogger(TestSnakeEyesService.class);
+    final static Logger log = LoggerFactory.getLogger(SnakeEyesServiceTest.class);
 
     @Autowired
     private SnakeEyesDiceValidator snakeEyesDiceValidator;
