@@ -22,14 +22,14 @@ public class ITSnakeEyes {
     @Test
     public void expectSnakeEyesServerJsonResponse() throws IOException {
 
-        final ClientResponse response = ClientBuilder.newClient()
+        final String responseBody = ClientBuilder.newClient()
         .target("http://localhost:8080").path("snakeeyes/play")
         .queryParam("stake",2.00)
-        .request().get(ClientResponse.class);
+        .request().get(String.class);
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK);
+//        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK);
 
-        final String responseBody = response.readEntity(String.class);
+//        final String responseBody = response.readEntity(String.class);
 
         final ObjectMapper mapper = new ObjectMapper();
         final Outcome outcome = mapper.readValue(responseBody, Outcome.class);

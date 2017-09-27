@@ -47,7 +47,7 @@ public class TestSnakeEyesController {
         mockMvc.perform(
                 get("/snakeeyes/play").param("stake","1.00"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json; charset=UTF-8"))
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("dice1").value(1))
                 .andExpect(jsonPath("dice2").value(1))
                 .andExpect(jsonPath("stake").value(1.00))

@@ -23,7 +23,7 @@ class SnakeEyesController {
         this.snakeEyesService = snakeEyesService;
     }
 
-    @GetMapping(path = "/play", produces = "application/json; charset=UTF-8")
+    @GetMapping(path = "/play", produces = "application/json;charset=UTF-8")
     public ResponseEntity<Outcome> generateOutcome(@RequestParam("stake") float stake) {
         if(stake == 1.00f || stake == 2.00f || stake == 10.00f)
             return new ResponseEntity<>(snakeEyesService.getOutcome(stake), HttpStatus.OK);
