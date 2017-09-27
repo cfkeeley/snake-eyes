@@ -24,9 +24,9 @@ class SnakeEyesController {
     }
 
     @GetMapping(path = "/play", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<Outcome> generateOutcome(@RequestParam("stake") final Double stake) {
-        if(stake == 1.00 || stake == 2.00 || stake == 10.00)
-            return new ResponseEntity<Outcome>(snakeEyesService.getOutcome(stake), HttpStatus.OK);
+    public ResponseEntity<Outcome> generateOutcome(@RequestParam("stake") float stake) {
+        if(stake == 1.00f || stake == 2.00f || stake == 10.00f)
+            return new ResponseEntity<>(snakeEyesService.getOutcome(stake), HttpStatus.OK);
         else
             throw new IllegalStateException("please supply a valid stake value");
     }

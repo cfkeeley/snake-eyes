@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class SnakeEyesDiceValidator {
+ class SnakeEyesDiceValidator {
 
     public String validate(final String snakeEyesDiceResult) {
         final Pattern diceRollValidation = Pattern.compile("([1-6])\\t([1-6])\n");

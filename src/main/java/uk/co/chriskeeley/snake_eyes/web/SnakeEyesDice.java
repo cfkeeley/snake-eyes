@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.ws.rs.client.ClientBuilder;
 
 @Service
-public class SnakeEyesDice {
+ class SnakeEyesDice {
 
     final static Logger log = LoggerFactory.getLogger(SnakeEyesDice.class);
 

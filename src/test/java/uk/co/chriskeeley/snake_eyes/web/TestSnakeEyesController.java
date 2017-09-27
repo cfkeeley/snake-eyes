@@ -41,8 +41,8 @@ public class TestSnakeEyesController {
     @Test
     public void controllerShouldReturnExpectedOutcomeForSnakeEyes() throws Exception {
 
-        when(snakeEyesService.getOutcome(1.00)).thenReturn(
-                new Outcome(1,1, 1.00, 30.0, Payout.SNAKE_EYES));
+        when(snakeEyesService.getOutcome(1.00f)).thenReturn(
+                new Outcome(1,1, 1.00f, 30.0f, Payout.SNAKE_EYES));
 
         mockMvc.perform(
                 get("/snakeeyes/play").param("stake","1.00"))

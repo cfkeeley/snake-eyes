@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SnakeEyesService {
+ class SnakeEyesService {
 
     final static Logger log = LoggerFactory.getLogger(SnakeEyesService.class);
 
@@ -20,7 +20,7 @@ public class SnakeEyesService {
         this.snakeEyesDiceValidator = snakeEyesDiceValidator;
     }
 
-    public Outcome getOutcome(final double stake) {
+    public Outcome getOutcome(final float stake) {
 
         final String diceValues = snakeEyesDiceValidator.validate(
                 snakeEyesDice.roll());
@@ -33,8 +33,10 @@ public class SnakeEyesService {
         int dice2 = Integer.parseInt(tokens[1]);
 
         final boolean isSnakeEyes = dice1 == 1 && dice2 == 1;
-        final Payout payout = isSnakeEyes ? Payout.SNAKE_EYES : dice1 == dice2 ? Payout.OTHER_PAIR :Payout.NO_WIN;
-        final double winnings = stake * payout.multiplier;
+        final Payout payout = isSnakeEyes ? Payout.SNAKE_EYES : dice1 == dice2
+                ? Payout.OTHER_PAIR :Payout.NO_WIN;
+
+        final float winnings = stake * payout.multiplier;
 
         return new Outcome(dice1, dice2, stake, winnings, payout);
     }

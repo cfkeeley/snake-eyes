@@ -36,7 +36,7 @@ public class TestSnakeEyesService {
         when(snakeEyesDice.roll()).thenReturn("1 2");
 
         final SnakeEyesService snakeEyesService = new SnakeEyesService(snakeEyesDice,snakeEyesDiceValidator);
-        final Outcome outcome = snakeEyesService.getOutcome(1.00);
+        final Outcome outcome = snakeEyesService.getOutcome(1.00f);
 
         assertThat(outcome.getDice1()).as("unexpected dice 1 value").isEqualTo(1);
         assertThat(outcome.getDice2()).as("unexpected dice 2 value").isEqualTo(2);
@@ -53,7 +53,7 @@ public class TestSnakeEyesService {
         when(snakeEyesDice.roll()).thenReturn("1 1");
 
         final SnakeEyesService snakeEyesService = new SnakeEyesService(snakeEyesDice,snakeEyesDiceValidator);
-        final Outcome outcome = snakeEyesService.getOutcome(2.00);
+        final Outcome outcome = snakeEyesService.getOutcome(2.00f);
 
         assertThat(outcome.getDice1()).as("unexpected dice 1 value").isEqualTo(1);
         assertThat(outcome.getDice2()).as("unexpected dice 2 value").isEqualTo(1);
