@@ -8,6 +8,14 @@ public class Outcome {
     private final float winnings;
     private final Payout payout_name;
 
+    public Outcome() {
+        this.dice1 = 0;
+        this.dice2 = 0;
+        this.stake = 0f;
+        this.winnings = 0f;
+        this.payout_name = Payout.NO_WIN;
+    }
+
     public Outcome(final int dice1, final int dice2, final float stake, final float winnings, final Payout payout_name) {
         this.dice1 = dice1;
         this.dice2 = dice2;
@@ -35,4 +43,5 @@ public class Outcome {
     public String getPayout_name() {
         return payout_name.getName();
     }
+
 }
