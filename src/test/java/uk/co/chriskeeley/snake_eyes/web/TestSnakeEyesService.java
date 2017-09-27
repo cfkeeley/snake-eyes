@@ -30,36 +30,42 @@ public class TestSnakeEyesService {
     @Autowired
     private SnakeEyesDice snakeEyesDice;
 
+
+
     @Test
     public void shouldRespondWithExpectedOtherPairOutcome() {
 
-        when(snakeEyesDice.roll()).thenReturn("1 2");
+        final String diceValues = "1\t2\n";
+        when(snakeEyesDice.roll()).thenReturn(diceValues);
+        when(snakeEyesDiceValidator.validate(diceValues)).thenReturn(diceValues);
 
         final SnakeEyesService snakeEyesService = new SnakeEyesService(snakeEyesDice,snakeEyesDiceValidator);
         final Outcome outcome = snakeEyesService.getOutcome(1.00f);
 
         assertThat(outcome.getDice1()).as("unexpected dice 1 value").isEqualTo(1);
         assertThat(outcome.getDice2()).as("unexpected dice 2 value").isEqualTo(2);
-        assertThat(outcome.getStake()).as("unexpected stake value").isEqualTo(1.00);
-        assertThat(outcome.getWinnings()).as("unexpected winnings value").isEqualTo(7.00);
-        assertThat(outcome.getPayout_name()).as("unexpected winnings value")
-                .isEqualTo(Payout.OTHER_PAIR.getName());
+        assertThat(outcome.getStake()).as("unexpected stake value").isEqualTo(1.00f);
+        assertThat(outcome.getWinnings()).as("unexpected winnings value").isEqualTo(0.00f);
+        assertThat(outcome.getPayout_name()).as("unexpected payout name value")
+                .isEqualTo(Payout.NO_WIN.getName());
 
     }
 
     @Test
     public void shouldRespondWithExpectedSnakeEyesOutcome() {
 
-        when(snakeEyesDice.roll()).thenReturn("1 1");
+        final String diceValues = "1\t1\n";
+        when(snakeEyesDice.roll()).thenReturn(diceValues);
+        when(snakeEyesDiceValidator.validate(diceValues)).thenReturn(diceValues);
 
         final SnakeEyesService snakeEyesService = new SnakeEyesService(snakeEyesDice,snakeEyesDiceValidator);
         final Outcome outcome = snakeEyesService.getOutcome(2.00f);
 
         assertThat(outcome.getDice1()).as("unexpected dice 1 value").isEqualTo(1);
         assertThat(outcome.getDice2()).as("unexpected dice 2 value").isEqualTo(1);
-        assertThat(outcome.getStake()).as("unexpected stake value").isEqualTo(2.00);
-        assertThat(outcome.getWinnings()).as("unexpected winnings value").isEqualTo(60.00);
-        assertThat(outcome.getPayout_name()).as("unexpected winnings value")
+        assertThat(outcome.getStake()).as("unexpected stake value").isEqualTo(2.00f);
+        assertThat(outcome.getWinnings()).as("unexpected winnings value").isEqualTo(60.00f);
+        assertThat(outcome.getPayout_name()).as("unexpected payout name value")
                 .isEqualTo(Payout.SNAKE_EYES.getName());
     }
 
@@ -70,7 +76,7 @@ public class TestSnakeEyesService {
 
         @Bean
         public SnakeEyesDiceValidator snakeEyesDiceValidator() {
-            return new SnakeEyesDiceValidator();
+            return Mockito.mock(SnakeEyesDiceValidator.class);
         }
 
         @Bean
